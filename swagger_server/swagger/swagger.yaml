@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Swagger Test API
+  description: UI Run test for Automation Team
+  termsOfService: http://google.co.il/
+  contact:
+    email: shayperp@rafael.co.il
+  license:
+    name: By Shay perpinial
+    url: http://azure.com
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: http://server.to.checkTest
+  description: Test_server
+- url: "http://{localhost}:{port}/test_name/{params}"
+  description: provide ports for run on your local machine
+  variables:
+    params:
+      default: None
+    hostname:
+      default: localhost
+    port:
+      enum:
+      - "1234"
+      - "12345"
+      default: "1234"
+tags:
+- name: Test
+  description: Here we Run the test ./ test name
+  externalDocs:
+    description: More Info / Guide
+    url: http://someURLIfNeed.com/
+paths:
+  /tests/:
+    summary: test to Execute
+    description: chose test to run
+    post:
+      tags:
+      - Test
+      summary: Test ingestion_discrete
+      operationId: by_name
+      parameters:
+      - name: testId
+        in: query
+        description: String ID of the Test to Post
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: addParams
+        in: query
+        description: description of this spesific test
+        required: false
+        allowEmptyValue: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      requestBody:
+        description: the new test add
+        content:
+          Apliction/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: Successfuly run the test all
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        "400":
+          description: Failed to run the test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+      x-openapi-router-controller: swagger_server.controllers.test_controller
+components:
+  schemas:
+    Test:
+      properties:
+        testId:
+          type: integer
+        name:
+          type: string
+        prams:
+          type: string
+      example:
+        name: name
+        testId: 0
+        prams: prams
+
