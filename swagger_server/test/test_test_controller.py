@@ -5,8 +5,8 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.test import Test  # noqa: E501
-from swagger_server.test import BaseTestCase
+from test_controller.swagger_server.models.test import Test  # noqa: E501
+from test_controller.swagger_server.test import BaseTestCase
 
 
 class TestTestController(BaseTestCase):
@@ -28,6 +28,8 @@ class TestTestController(BaseTestCase):
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
+
+        print(response)
 
 
 if __name__ == '__main__':

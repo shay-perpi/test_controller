@@ -9,11 +9,8 @@ info:
     name: By Shay perpinial
     url: http://azure.com
   version: 1.0.0
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
 servers:
-- url: http://server.to.checkTest
+- url: http://server.com
   description: Test_server
 - url: "http://{localhost}:{port}/test_name/{params}"
   description: provide ports for run on your local machine
@@ -30,9 +27,7 @@ servers:
 tags:
 - name: Test
   description: Here we Run the test ./ test name
-  externalDocs:
-    description: More Info / Guide
-    url: http://someURLIfNeed.com/
+
 paths:
   /tests/:
     summary: test to Execute
@@ -53,7 +48,7 @@ paths:
           type: string
       - name: addParams
         in: query
-        description: description of this spesific test
+        description: description of this specific test
         required: false
         allowEmptyValue: true
         style: form
@@ -61,15 +56,17 @@ paths:
         schema:
           type: string
       requestBody:
-        description: the new test add
+        description: Input Json obj with 'env_var' key and insert your environment variable
         content:
-          Apliction/json:
+          Application/json:
             schema:
               type: string
-        required: true
+                Example Value
+
+        required: false
       responses:
         "200":
-          description: Successfuly run the test all
+          description: Successfully run the test all
           content:
             application/json:
               schema:
